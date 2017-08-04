@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:1.4.5"
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
+    }
+}
+
+apply plugin: "io.ratpack.ratpack-groovy"
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "idea"
+apply plugin: "eclipse"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    runtime 'org.slf4j:slf4j-simple:1.7.21'
+
+    testCompile ratpack.dependency('groovy-test')
+    testCompile ('org.spockframework:spock-core:1.0-groovy-2.4') {
+        exclude module: "groovy-all"
+    }
+    compile ('org.grails:grails-datastore-gorm-hibernate5:6.1.5.RELEASE') {
+        exclude module: 'groovy'
+    }
+    compile 'com.h2database:h2:1.4.186'
+
+    compile ratpack.dependency('hikari')
+}
